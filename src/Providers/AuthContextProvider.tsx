@@ -9,7 +9,6 @@ import {
 import { useState, useEffect } from "react";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 function AuthContextProvider({ children }: { children?: React.ReactNode }) {
-  const [user, setUser] = useState<any>(null);
   const [isAuth, setIsAuth] = useState(false);
   const googleSigIn = () => {
     const Provider = new GoogleAuthProvider();
@@ -24,20 +23,28 @@ function AuthContextProvider({ children }: { children?: React.ReactNode }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCookie(null, "userID", user?.uid, {
+      setCookie(null, "userID", user?.uid || "", {
         maxAge: 30 * 24 * 60 * 60,
         path: "/",
       });
-      setUser(auth?.displayName);
+
       setIsAuth(true);
       console.log(user);
     });
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const cookies = parseCookies();
+    if (cookies.userID && cookies.userID != "") {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+  }, []);
+
   const store = {
     isAuth,
-    user,
     googleSigIn,
     logout,
   };
