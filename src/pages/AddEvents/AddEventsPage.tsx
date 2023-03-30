@@ -8,10 +8,7 @@ import { addEvent } from "../../redux/features/CRUDEvents/Eventslice";
 import { useStoreDispatch } from "../../hooks/UseReducer";
 import { useNavigate } from "react-router-dom";
 import PlaceSearchSelector from "../../components/modules/selector/components/PlaceSearch/PlaceSearch";
-interface Option {
-  label: string;
-  value: string;
-}
+import { showToastMessage } from "../../components/modules/Toastify/ToastMessages";
 const AddEventsPage = () => {
   const dispatch = useStoreDispatch();
   const navigate = useNavigate();
@@ -34,39 +31,43 @@ const AddEventsPage = () => {
   const handelOnSubmit = (e) => {
     e.preventDefault();
     console.log(e);
-    const bannerIMG = ImageUrlGenerator(bannerImg);
-    const organizerIMG = ImageUrlGenerator(organizerImg);
+    try {
+      const bannerIMG = ImageUrlGenerator(bannerImg);
+      const organizerIMG = ImageUrlGenerator(organizerImg);
 
-    bannerIMG.then((res) => {
-      if (res.success) {
-        setBannerImgUrl(res.imgURL);
-      }
-    });
+      bannerIMG.then((res) => {
+        if (res.success) {
+          setBannerImgUrl(res.imgURL);
+        }
+      });
 
-    organizerIMG.then((res) => {
-      if (res.success) {
-        setOrganizerImgUrl(res.imgURL);
-      }
-    });
-
-    dispatch(
-      addEvent({
-        name: eventName,
-        bannerURL: bannerImgUrl,
-        organizerName: organizerName,
-        organizerImgURL: organizerImgUrl,
-        totalticket: tiketAvailable,
-        ticketleft: tiketAvailable,
-        startingDate: startingDate,
-        startingTime: startingTime,
-        category: eventCatagory,
-        description: eventDesc,
-        organizeAt: eventLocation,
-        endingDate: endingDate,
-        endingTime: endingTime,
-      }),
-    );
-    navigate("/");
+      organizerIMG.then((res) => {
+        if (res.success) {
+          setOrganizerImgUrl(res.imgURL);
+        }
+      });
+      dispatch(
+        addEvent({
+          name: eventName,
+          bannerURL: bannerImgUrl,
+          organizerName: organizerName,
+          organizerImgURL: organizerImgUrl,
+          totalticket: tiketAvailable,
+          ticketleft: tiketAvailable,
+          startingDate: startingDate,
+          startingTime: startingTime,
+          category: eventCatagory,
+          description: eventDesc,
+          organizeAt: eventLocation,
+          endingDate: endingDate,
+          endingTime: endingTime,
+        }),
+      );
+      navigate("/");
+      showToastMessage("SUCCESS", "Event Was Created");
+    } catch (err) {
+      showToastMessage("ERROR", err);
+    }
   };
 
   return (

@@ -4,6 +4,7 @@ import { timeFormate } from "../../utils/TimeFunc";
 import { bookTicket } from "../../redux/features/CRUDEvents/Eventslice";
 import { useStoreDispatch } from "../../hooks/UseReducer";
 import useAuth from "../../hooks/useAuth";
+import { showToastMessage } from "../modules/Toastify/ToastMessages";
 const EventCard = ({
   id,
   name,
@@ -85,6 +86,12 @@ const EventCard = ({
               onClick={() => {
                 if (isAuth) {
                   dispatch(bookTicket({ id }));
+                  showToastMessage(
+                    "SUCCESS",
+                    `You Ticket Was Booked For ${name} Events`,
+                  );
+                } else {
+                  showToastMessage("ERROR", `Please Login First!`);
                 }
               }}
             >

@@ -8,10 +8,7 @@ import { useStoreSelector } from "../../hooks/UseReducer";
 import _ from "lodash";
 import { eventCategory } from "../../constant";
 import { InitialStateType } from "../../redux/features/CRUDEvents/InitialState.type";
-interface Option {
-  label: string;
-  value: string;
-}
+
 const HomePage = () => {
   const events = useStoreSelector(getAllEvents);
   const [select, setSelect] = React.useState(new Date());
