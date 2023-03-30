@@ -1,0 +1,87 @@
+.eventAddContainer{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+.addEventPageTitle{
+	font-size: 3.2rem;
+}
+
+.addEventFormContainer{
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1.5rem;
+	border-radius: 20px;
+	background-color: #bbbbbb33;
+}
+
+.formGroup{
+	display: flex ;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+
+.formGroupTextField{
+	display: flex;
+	flex-direction: column;
+}
+.formGroupElement{
+	width: 48%;
+	display: flex;
+	flex-direction: column;
+}
+
+.formLabel{
+	font-size: 1.2rem
+}
+
+.formInput{
+	padding: .5rem 1rem;
+	border-radius: 20px;
+	border: none;
+	font-size: 1rem;
+}
+
+.formTextArea{
+	padding: .5rem 1rem;
+	border-radius: 20px;
+	border: none;
+	font-size: 1rem;	
+}
+
+.formGroupElementGroup{
+	display: flex;
+	gap: 1rem;
+}
+
+.formButtonContainer{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.formButton{
+	
+		background-color: #21c0e8;
+		color: #fff;
+		padding: 0.75rem;
+		border-radius: 20px;
+		border: none;
+
+}
+
+@media only screen and (max-width: 960px){
+	.formGroup{
+
+		flex-direction: column;
+		gap: 1rem;
+	}
+	.formGroupElement{
+		width: 100%;
+
+	}
+}

@@ -1,0 +1,135 @@
+.eventCardContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 2px solid #bbbbbb60;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  /* height: 400px; */
+}
+
+.eventCardBanner {
+  width: 100%;
+  height: 200px;
+}
+
+.eventCardInfo {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eventCardAboutInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.eventCardAboutTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.eventOrganizerDetails {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #bbbbbb;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1rem;
+}
+.eventCardTicketInfo {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 0.75rem;
+}
+.eventCardTickets {
+}
+.eventCardTicketNumber {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.eventCardLogoContainer {
+  position: absolute;
+  width: 8%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #fff;
+  left: 1rem;
+  top: 26%;
+}
+
+.eventCardButton {
+  background-color: #21c0e8;
+  color: #fff;
+  padding: 0 0.75rem;
+  border-radius: 20px;
+  border: none;
+  height: 2.5rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  .eventCardContainer {
+    gap: 0.95rem;
+  }
+}
+@media only screen and (max-width: 960px) {
+  .eventCardInfo {
+    gap: 0.75rem;
+    flex-direction: column;
+  }
+  .eventCardTicketInfo {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .eventCardTickets {
+    display: flex;
+    gap: 1rem;
+  }
+  .eventCardContainer {
+    gap: 0.75rem;
+  }
+
+  .eventCardLogoContainer {
+    width: 12% !important;
+    top: 32% !important;
+  }
+  .eventOrganizerDetails {
+    font-size: 0.85rem;
+  }
+}
+@media only screen and (max-width: 660px) {
+  .eventCardContainer {
+    gap: 0.55rem;
+  }
+  .eventCardInfo {
+    gap: 0.55rem;
+  }
+  .eventCardLogoContainer {
+    width: 18% !important;
+    top: 34% !important;
+    left: 75%;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .eventCardLogoContainer {
+    width: 20% !important;
+    top: 34% !important;
+    left: 70%;
+  }
+  .eventOrganizerDetails {
+    font-size: 0.65rem;
+  }
+}
+
+@media only screen and (max-width: 325px) {
+  .eventCardLogoContainer {
+    width: 22% !important;
+    top: 32% !important;
+    left: 70%;
+  }
+}
