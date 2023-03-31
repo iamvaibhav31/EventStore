@@ -19,7 +19,7 @@ const PlaceSearchSelector = ({
     placeSearchAPI(inputValue)
       ?.then((res) => {
         console.log(res);
-        const options = res.data.map((place) => ({
+        const options = res.data.map((place: any) => ({
           label: place.display_name,
           value: place.display_name,
         }));

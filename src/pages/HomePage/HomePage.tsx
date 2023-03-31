@@ -8,7 +8,11 @@ import { useStoreSelector } from "../../hooks/UseReducer";
 import _ from "lodash";
 import { eventCategory } from "../../constant";
 import { InitialStateType } from "../../redux/features/CRUDEvents/InitialState.type";
-
+import { OnChangeValue } from "react-select";
+interface Option {
+  label: string;
+  value: string;
+}
 const HomePage = () => {
   const events = useStoreSelector(getAllEvents);
   const [select, setSelect] = React.useState(new Date());
@@ -17,6 +21,7 @@ const HomePage = () => {
     category?: string;
   }>({});
   const [options, setOptions] = useState<Option[]>([]);
+
   const filterWrapper = (events: InitialStateType[]) => {
     let filterdata = events;
 
@@ -39,7 +44,7 @@ const HomePage = () => {
         <button
           className="homePagefilter"
           onClick={() => {
-            setShowFilter((preState) => !preState);
+            setShowFilter((preState: boolean) => !preState);
           }}
         >
           Filter
@@ -53,7 +58,7 @@ const HomePage = () => {
             <Select
               type="CATEGORY"
               option={eventCategory}
-              onChange={(newValue) => {
+              onChange={(newValue: OnChangeValue<Option, boolean>) => {
                 console.log(newValue?.value);
                 setApplyingFilter((prevState) => {
                   return { ...prevState, category: newValue?.value };
@@ -65,9 +70,9 @@ const HomePage = () => {
             <PlaceSearchSelector
               options={options}
               setOptions={setOptions}
-              onChange={(newValue) => {
+              onChange={(newValue: OnChangeValue<Option, boolean>) => {
                 setApplyingFilter((prevState) => {
-                  return { ...prevState, category: newValue?.value };
+                  return { ...prevState, organizeAt: newValue?.value };
                 });
               }}
             />

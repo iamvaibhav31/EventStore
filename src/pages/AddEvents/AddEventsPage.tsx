@@ -34,8 +34,8 @@ const AddEventsPage = () => {
   const [eventLocation, setEventLocation] = useState("");
   const [tiketAvailable, setTiketAvailable] = useState(0);
 
-  const handelOnSubmit = (
-    e: React.MouseEventHandler<HTMLButtonElement> | undefined,
+  const handelOnSubmit = async (
+    e: React.MouseEventHandler<HTMLButtonElement>,
   ) => {
     e.preventDefault();
     console.log(e);
@@ -43,14 +43,16 @@ const AddEventsPage = () => {
       const bannerIMG = ImageUrlGenerator(bannerImg);
       const organizerIMG = ImageUrlGenerator(organizerImg);
 
-      bannerIMG.then((res) => {
+      await bannerIMG.then((res) => {
         if (res.success) {
+          console.log(res, bannerImgUrl);
           setBannerImgUrl(res?.imgURL);
         }
       });
 
-      organizerIMG.then((res) => {
+      await organizerIMG.then((res) => {
         if (res.success) {
+          console.log(res);
           setOrganizerImgUrl(res?.imgURL);
         }
       });
