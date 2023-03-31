@@ -1,5 +1,5 @@
 export interface DatePickerProps {
-  select: Date;
+  select: Date | null;
   onChange: (
     date: Date | null,
     event: React.SyntheticEvent<any, Event> | undefined,

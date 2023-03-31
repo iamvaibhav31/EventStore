@@ -9,6 +9,12 @@ import { useStoreDispatch } from "../../hooks/UseReducer";
 import { useNavigate } from "react-router-dom";
 import PlaceSearchSelector from "../../components/modules/selector/components/PlaceSearch/PlaceSearch";
 import { showToastMessage } from "../../components/modules/Toastify/ToastMessages";
+import { OnChangeValue } from "react-select";
+
+interface Option {
+  label: string;
+  value: string;
+}
 const AddEventsPage = () => {
   const dispatch = useStoreDispatch();
   const navigate = useNavigate();
@@ -20,15 +26,17 @@ const AddEventsPage = () => {
   const [eventName, setEventName] = useState("");
   const [eventDesc, setEventDesc] = useState("");
   const [organizerName, setOrganierName] = useState("");
-  const [startingDate, setStartingDate] = useState(new Date());
+  const [startingDate, setStartingDate] = useState<Date | null>(new Date());
   const [startingTime, setStartingTime] = useState("2:00 AM");
-  const [endingDate, setEndingDate] = useState(new Date());
+  const [endingDate, setEndingDate] = useState<Date | null>(new Date());
   const [endingTime, setEndingTime] = useState("2:00 AM");
   const [eventCatagory, setEventCatagory] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [tiketAvailable, setTiketAvailable] = useState(0);
 
-  const handelOnSubmit = (e) => {
+  const handelOnSubmit = (
+    e: React.MouseEventHandler<HTMLButtonElement> | undefined,
+  ) => {
     e.preventDefault();
     console.log(e);
     try {
@@ -37,13 +45,13 @@ const AddEventsPage = () => {
 
       bannerIMG.then((res) => {
         if (res.success) {
-          setBannerImgUrl(res.imgURL);
+          setBannerImgUrl(res?.imgURL);
         }
       });
 
       organizerIMG.then((res) => {
         if (res.success) {
-          setOrganizerImgUrl(res.imgURL);
+          setOrganizerImgUrl(res?.imgURL);
         }
       });
       dispatch(
@@ -84,7 +92,7 @@ const AddEventsPage = () => {
               Banner
             </label>
             <FileUpload
-              onChange={(e) => {
+              onChange={(e: React.FormEvent<HTMLLabelElement>) => {
                 setBannerImg(e.target.files[0]);
               }}
             />
@@ -95,7 +103,7 @@ const AddEventsPage = () => {
               Organizer Image
             </label>
             <FileUpload
-              onChange={(e) => {
+              onChange={(e: React.FormEvent<HTMLLabelElement>) => {
                 setOrganizerImg(e.target.files[0]);
               }}
             />
@@ -109,7 +117,7 @@ const AddEventsPage = () => {
             <input
               type="text"
               className="formInput"
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setEventName(e.target.value);
               }}
               required
@@ -122,7 +130,7 @@ const AddEventsPage = () => {
             <input
               type="text"
               className="formInput"
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setOrganierName(e.target.value);
               }}
               required
@@ -135,7 +143,7 @@ const AddEventsPage = () => {
             <input
               type="number"
               className="formInput"
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setTiketAvailable(e.target.value);
               }}
               required
@@ -148,7 +156,7 @@ const AddEventsPage = () => {
             <Select
               type="CATEGORY"
               option={eventCategory}
-              onChange={(newValue) => {
+              onChange={(newValue: OnChangeValue<Option, boolean>) => {
                 console.log(newValue?.value);
                 setEventCatagory(newValue?.value);
               }}
@@ -159,7 +167,7 @@ const AddEventsPage = () => {
             <PlaceSearchSelector
               options={options}
               setOptions={setOptions}
-              onChange={(newValue) => {
+              onChange={(newValue: OnChangeValue<Option, boolean>) => {
                 console.log(newValue);
                 setEventLocation(newValue?.value);
               }}
@@ -181,14 +189,24 @@ const AddEventsPage = () => {
           <div className="formGroupElement">
             <label htmlFor="">Starting At:</label>
             <div className="formGroupElementGroup">
-              <DataPicker select={startingDate} onChange={() => {}} />
+              <DataPicker
+                select={startingDate}
+                onChange={(data: Date | null) => {
+                  setStartingDate(data);
+                }}
+              />
               {/* <DataPicker select={startingDate} onChange={() => {}} /> */}
             </div>
           </div>
           <div className="formGroupElement">
-            <label htmlFor="">Starting At:</label>
+            <label htmlFor="">Ending At:</label>
             <div className="formGroupElementGroup">
-              <DataPicker select={startingDate} onChange={() => {}} />
+              <DataPicker
+                select={endingDate}
+                onChange={(data: Date | null) => {
+                  setEndingDate(data);
+                }}
+              />
               {/* <DataPicker select={startingDate} onChange={() => {}} /> */}
             </div>
           </div>

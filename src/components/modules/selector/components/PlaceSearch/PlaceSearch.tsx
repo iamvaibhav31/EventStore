@@ -34,7 +34,7 @@ const PlaceSearchSelector = ({
     <ReactSelect
       type="PLACESEARCH"
       onInputChange={handleInputChange}
-      option={options}
+      option={options ?? []}
       isLoading={loading}
       onChange={onChange}
     />
