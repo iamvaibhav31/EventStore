@@ -14,4 +14,5 @@ export interface InitialStateType {
   endingTime: string;
   ticketleft: number | "SOLD OUT";
   totalticket: number;
+  [key: string]: any;
 }

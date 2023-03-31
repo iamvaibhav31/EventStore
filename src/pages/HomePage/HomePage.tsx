@@ -8,7 +8,7 @@ import { useStoreSelector } from "../../hooks/UseReducer";
 import _ from "lodash";
 import { eventCategory } from "../../constant";
 import { InitialStateType } from "../../redux/features/CRUDEvents/InitialState.type";
-import { OnChangeValue } from "react-select";
+import { ActionMeta, MultiValue, OnChangeValue } from "react-select";
 interface Option {
   label: string;
   value: string;
@@ -58,10 +58,15 @@ const HomePage = () => {
             <Select
               type="CATEGORY"
               option={eventCategory}
-              onChange={(newValue: OnChangeValue<Option, boolean>) => {
-                console.log(newValue?.value);
+              onChange={(
+                newValue: OnChangeValue<Option | MultiValue<Option>, boolean>,
+                actionMeta: ActionMeta<Option>,
+              ) => {
                 setApplyingFilter((prevState) => {
-                  return { ...prevState, category: newValue?.value };
+                  return {
+                    ...prevState,
+                    category: (newValue as Option)?.value,
+                  };
                 });
               }}
             />
@@ -70,9 +75,15 @@ const HomePage = () => {
             <PlaceSearchSelector
               options={options}
               setOptions={setOptions}
-              onChange={(newValue: OnChangeValue<Option, boolean>) => {
+              onChange={(
+                newValue: OnChangeValue<Option | MultiValue<Option>, boolean>,
+                actionMeta: ActionMeta<Option>,
+              ) => {
                 setApplyingFilter((prevState) => {
-                  return { ...prevState, organizeAt: newValue?.value };
+                  return {
+                    ...prevState,
+                    category: (newValue as Option)?.value,
+                  };
                 });
               }}
             />
