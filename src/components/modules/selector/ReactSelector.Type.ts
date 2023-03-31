@@ -1,9 +1,4 @@
-import {
-  ActionMeta,
-  GroupBase,
-  OnChangeValue,
-  OptionsOrGroups,
-} from "react-select";
+import { ActionMeta, GroupBase, MultiValue, OnChangeValue } from "react-select";
 
 interface Option {
   label: string;
@@ -11,14 +6,14 @@ interface Option {
 }
 
 type IsMulti = boolean;
-type selectType = "CATEGORY" | "PLACESEARCH" | "FIXEDTIME";
+type selectType = "CATEGORY" | "PLACESEARCH";
 export interface ReactSelectProps {
   type: selectType;
   option?: Option[];
   isLoading?: boolean;
   onInputChange?: (inputValue: string) => void;
   onChange?: (
-    newValue: OnChangeValue<Option, IsMulti>,
+    newValue: OnChangeValue<Option | MultiValue<Option>, IsMulti>,
     actionMeta: ActionMeta<Option>,
   ) => void;
 }

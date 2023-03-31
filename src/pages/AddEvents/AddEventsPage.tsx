@@ -1,6 +1,6 @@
 import "./AddEventPage.css";
 import { FileUpload, DataPicker, Select } from "../../components/modules";
-import { eventCategory } from "../../constant";
+import { eventCategory, eventCategoryType } from "../../constant";
 import { useState } from "react";
 
 import ImageUrlGenerator from "../../utils/FileUrlService";
@@ -9,16 +9,13 @@ import { useStoreDispatch } from "../../hooks/UseReducer";
 import { useNavigate } from "react-router-dom";
 import PlaceSearchSelector from "../../components/modules/selector/components/PlaceSearch/PlaceSearch";
 import { showToastMessage } from "../../components/modules/Toastify/ToastMessages";
-import { OnChangeValue } from "react-select";
+import { ActionMeta, MultiValue, OnChangeValue } from "react-select";
 
 interface Option {
   label: string;
   value: string;
 }
 
-interface HTMLInputEvent extends Event {
-  target: HTMLInputElement & EventTarget;
-}
 const AddEventsPage = () => {
   const dispatch = useStoreDispatch();
   const navigate = useNavigate();
@@ -83,7 +80,7 @@ const AddEventsPage = () => {
       navigate("/");
       showToastMessage("SUCCESS", "Event Was Created");
     } catch (err) {
-      showToastMessage("ERROR", err);
+      showToastMessage("ERROR", "Something Went Wrong");
     }
   };
 
@@ -181,9 +178,12 @@ const AddEventsPage = () => {
             <Select
               type="CATEGORY"
               option={eventCategory}
-              onChange={(newValue: OnChangeValue<Option, boolean>) => {
-                console.log(newValue?.value);
-                setEventCatagory(newValue?.value);
+              onChange={(
+                newValue: OnChangeValue<Option | MultiValue<Option>, boolean>,
+                actionMeta: ActionMeta<Option>,
+              ) => {
+                console.log(newValue);
+                setEventCatagory((newValue as Option)?.value);
               }}
             />
           </div>
@@ -192,9 +192,12 @@ const AddEventsPage = () => {
             <PlaceSearchSelector
               options={options}
               setOptions={setOptions}
-              onChange={(newValue: OnChangeValue<Option, boolean>) => {
+              onChange={(
+                newValue: OnChangeValue<Option | MultiValue<Option>, boolean>,
+                actionMeta: ActionMeta<Option>,
+              ) => {
                 console.log(newValue);
-                setEventLocation(newValue?.value);
+                setEventLocation((newValue as Option)?.value);
               }}
             />
           </div>
@@ -216,7 +219,7 @@ const AddEventsPage = () => {
             <div className="formGroupElementGroup">
               <DataPicker
                 select={startingDate}
-                onChange={(data: Date | null) => {
+                onChange={(data: Date) => {
                   setStartingDate(data);
                 }}
               />
@@ -228,7 +231,7 @@ const AddEventsPage = () => {
             <div className="formGroupElementGroup">
               <DataPicker
                 select={endingDate}
-                onChange={(data: Date | null) => {
+                onChange={(data: Date) => {
                   setEndingDate(data);
                 }}
               />
