@@ -1,7 +1,7 @@
 export interface DatePickerProps {
   select: Date | null;
   onChange: (
-    date: Date | null,
+    date: Date,
     event: React.SyntheticEvent<any, Event> | undefined,
   ) => void;
   minDate?: Date;

@@ -1,14 +1,11 @@
-import React from "react";
-import { eventCategory } from "../../../constant";
 import Select from "react-select";
-import AsyncSelect from "react-select/async";
 import { ReactSelectProps } from "./ReactSelector.Type";
 
 const ReactSelect = ({
   type,
   isLoading,
   onInputChange,
-  option,
+  option = [],
   onChange,
 }: ReactSelectProps) => {
   let selectOption = {};

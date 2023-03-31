@@ -8,7 +8,8 @@ async function ImageUrlGenerator(file: string) {
   if (!file)
     return {
       success: false,
-      error: "please select the file",
+      imgURL:
+        "https://cdn.pixabay.com/photo/2015/10/29/14/38/web-1012467_960_720.jpg",
     };
 
   const formData = new FormData();
@@ -28,7 +29,8 @@ async function ImageUrlGenerator(file: string) {
   } catch (error) {
     return {
       success: false,
-      error: error?.message,
+      imgURL:
+        "https://cdn.pixabay.com/photo/2015/10/29/14/38/web-1012467_960_720.jpg",
     };
   }
 }

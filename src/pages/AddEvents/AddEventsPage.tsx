@@ -15,6 +15,10 @@ interface Option {
   label: string;
   value: string;
 }
+
+interface HTMLInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
 const AddEventsPage = () => {
   const dispatch = useStoreDispatch();
   const navigate = useNavigate();
@@ -26,36 +30,39 @@ const AddEventsPage = () => {
   const [eventName, setEventName] = useState("");
   const [eventDesc, setEventDesc] = useState("");
   const [organizerName, setOrganierName] = useState("");
-  const [startingDate, setStartingDate] = useState<Date | null>(new Date());
+  const [startingDate, setStartingDate] = useState<Date>(new Date());
   const [startingTime, setStartingTime] = useState("2:00 AM");
-  const [endingDate, setEndingDate] = useState<Date | null>(new Date());
+  const [endingDate, setEndingDate] = useState<Date>(new Date());
   const [endingTime, setEndingTime] = useState("2:00 AM");
   const [eventCatagory, setEventCatagory] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [tiketAvailable, setTiketAvailable] = useState(0);
 
-  const handelOnSubmit = async (
-    e: React.MouseEventHandler<HTMLButtonElement>,
-  ) => {
-    e.preventDefault();
-    console.log(e);
+  const fileUpload = async () => {
+    const bannerIMG = ImageUrlGenerator(bannerImg);
+    const organizerIMG = ImageUrlGenerator(organizerImg);
+
+    await bannerIMG.then((res) => {
+      if (res.success) {
+        console.log(res, bannerImgUrl);
+        setBannerImgUrl(res.imgURL);
+      }
+    });
+
+    await organizerIMG.then((res) => {
+      if (res.success) {
+        console.log(res);
+        setOrganizerImgUrl(res.imgURL);
+      }
+    });
+  };
+
+  const handelOnSubmit = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+
+    fileUpload();
+    console.log(event);
     try {
-      const bannerIMG = ImageUrlGenerator(bannerImg);
-      const organizerIMG = ImageUrlGenerator(organizerImg);
-
-      await bannerIMG.then((res) => {
-        if (res.success) {
-          console.log(res, bannerImgUrl);
-          setBannerImgUrl(res?.imgURL);
-        }
-      });
-
-      await organizerIMG.then((res) => {
-        if (res.success) {
-          console.log(res);
-          setOrganizerImgUrl(res?.imgURL);
-        }
-      });
       dispatch(
         addEvent({
           name: eventName,
@@ -94,8 +101,16 @@ const AddEventsPage = () => {
               Banner
             </label>
             <FileUpload
-              onChange={(e: React.FormEvent<HTMLLabelElement>) => {
-                setBannerImg(e.target.files[0]);
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const files = e.target.files;
+                if (files && files.length > 0) {
+                  const reader = new FileReader();
+                  reader.readAsDataURL(files[0]);
+                  reader.onload = () => {
+                    const dataUrl = reader.result as string;
+                    setBannerImg(dataUrl);
+                  };
+                }
               }}
             />
           </div>
@@ -105,8 +120,16 @@ const AddEventsPage = () => {
               Organizer Image
             </label>
             <FileUpload
-              onChange={(e: React.FormEvent<HTMLLabelElement>) => {
-                setOrganizerImg(e.target.files[0]);
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const files = e.target.files;
+                if (files && files.length > 0) {
+                  const reader = new FileReader();
+                  reader.readAsDataURL(files[0]);
+                  reader.onload = () => {
+                    const dataUrl = reader.result as string;
+                    setOrganizerImg(dataUrl);
+                  };
+                }
               }}
             />
           </div>
@@ -146,7 +169,7 @@ const AddEventsPage = () => {
               type="number"
               className="formInput"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setTiketAvailable(e.target.value);
+                setTiketAvailable(parseInt(e.target.value));
               }}
               required
             />
