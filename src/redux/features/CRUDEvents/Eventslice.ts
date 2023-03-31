@@ -9,7 +9,7 @@ interface bookTicketPayloadType {
   id: string | undefined;
 }
 
-export const eventsSlice = createSlice({
+const eventsSlice = createSlice({
   name: "Events",
   initialState,
   reducers: {
@@ -20,7 +20,7 @@ export const eventsSlice = createSlice({
     },
     bookTicket: (state, action: PayloadAction<bookTicketPayloadType>) => {
       const eventid = action.payload.id;
-      const updatedEvent = state.map((event) => {
+      const updatedEvent = state.map((event: InitialStateType) => {
         if (event.id === eventid) {
           return {
             ...event,

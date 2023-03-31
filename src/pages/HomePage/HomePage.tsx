@@ -13,6 +13,7 @@ interface Option {
   label: string;
   value: string;
 }
+
 const HomePage = () => {
   const events = useStoreSelector(getAllEvents);
   const [select, setSelect] = React.useState(new Date());

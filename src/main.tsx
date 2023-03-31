@@ -7,7 +7,6 @@ import Providers from "./Providers";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Providers>
-      {/* "fdfsdf" */}
       <App />
     </Providers>
   </React.StrictMode>,
