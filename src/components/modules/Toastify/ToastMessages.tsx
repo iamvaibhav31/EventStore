@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, TypeOptions, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -10,16 +10,15 @@ const getToastType = (type: ToastType) => {
       return toast.TYPE.ERROR;
     case "INFO":
       return toast.TYPE.INFO;
-    default:
-      throw new Error("invalid toast message type");
   }
 };
 
 type ToastType = "SUCCESS" | "ERROR" | "INFO";
 
 const showToastMessage = (type: ToastType, message: string) => {
-  const typeOfToast = getToastType(type);
-  return toast[typeOfToast](message);
+  const typeOfToast: TypeOptions = getToastType(type);
+
+  return toast(message, { type: typeOfToast });
 };
 
 const ToastMessage = () => (
