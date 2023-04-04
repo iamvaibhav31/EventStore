@@ -21,7 +21,7 @@ const eventsSlice = createSlice({
     bookTicket: (state, action: PayloadAction<bookTicketPayloadType>) => {
       const eventid = action.payload.id;
       const updatedEvent = state.map((event: InitialStateType) => {
-        if (event.id === eventid) {
+        if (event.id === eventid && typeof event.ticketleft === "number") {
           return {
             ...event,
             ticketleft: event.ticketleft - 1,

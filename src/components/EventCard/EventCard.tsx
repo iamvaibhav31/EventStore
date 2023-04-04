@@ -80,7 +80,17 @@ const EventCard = ({
               Ticket Available
             </div>
           </div>
-          <div>
+          <div className="eventCardBuyTicketInfo">
+            {/* <div className="eventCardBuyNoOfTicket">
+              <label htmlFor="ticketnum" className="eventCardTicketNumber">
+                No of Ticket:
+              </label>
+              <input
+                type="number"
+                id="ticketnum"
+                className="eventCardBuyNoOfTicketInput"
+              />
+            </div> */}
             <button
               className="eventCardButton"
               onClick={() => {

@@ -31,7 +31,8 @@ const AddEventsPage = () => {
   const [startingTime, setStartingTime] = useState("2:00 AM");
   const [endingDate, setEndingDate] = useState<Date>(new Date());
   const [endingTime, setEndingTime] = useState("2:00 AM");
-  const [eventCatagory, setEventCatagory] = useState("");
+  const [eventCatagory, setEventCatagory] =
+    useState<eventCategoryType>("Business");
   const [eventLocation, setEventLocation] = useState("");
   const [tiketAvailable, setTiketAvailable] = useState(0);
 
@@ -54,7 +55,7 @@ const AddEventsPage = () => {
     });
   };
 
-  const handelOnSubmit = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handelOnSubmit = (event: any) => {
     event.preventDefault();
 
     fileUpload();
@@ -178,12 +179,9 @@ const AddEventsPage = () => {
             <Select
               type="CATEGORY"
               option={eventCategory}
-              onChange={(
-                newValue: OnChangeValue<Option | MultiValue<Option>, boolean>,
-                actionMeta: ActionMeta<Option>,
-              ) => {
+              onChange={(newValue: any, actionMeta: ActionMeta<Option>) => {
                 console.log(newValue);
-                setEventCatagory((newValue as Option)?.value);
+                setEventCatagory(newValue?.value);
               }}
             />
           </div>

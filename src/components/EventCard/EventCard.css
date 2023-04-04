@@ -72,6 +72,22 @@
   height: 2.5rem;
 }
 
+.eventCardBuyTicketInfo {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.eventCardBuyNoOfTicket {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.eventCardBuyNoOfTicketInput {
+  border-radius: 20px;
+  padding: 0.2rem 0.75rem;
+  width: 4rem;
+}
+
 @media only screen and (max-width: 1200px) {
   .eventCardContainer {
     gap: 0.95rem;
@@ -123,6 +139,15 @@
   }
   .eventOrganizerDetails {
     font-size: 0.65rem;
+  }
+  .eventCardInfo {
+    padding: 0.2rem;
+  }
+  .eventCardTicketInfo {
+    flex-direction: column;
+  }
+  .eventCardTickets {
+    justify-content: center;
   }
 }
 

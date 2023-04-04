@@ -17,6 +17,7 @@ const initialState: InitialStateType[] = [
     organizerName: "Vaibhav sharma",
     ticketleft: 200,
     totalticket: 200,
+    ticketperheadprice: 20,
   },
   {
     id: "2124",
@@ -35,6 +36,7 @@ const initialState: InitialStateType[] = [
     organizerName: "Vaibhav sharma",
     ticketleft: 200,
     totalticket: 200,
+    ticketperheadprice: 20,
   },
   {
     id: "9302",
@@ -53,6 +55,7 @@ const initialState: InitialStateType[] = [
     organizerName: "Vaibhav sharma",
     ticketleft: 200,
     totalticket: 200,
+    ticketperheadprice: 20,
   },
   {
     id: "9302",
@@ -71,6 +74,7 @@ const initialState: InitialStateType[] = [
     organizerName: "Vaibhav sharma",
     ticketleft: 200,
     totalticket: 200,
+    ticketperheadprice: 20,
   },
   {
     id: "9301",
@@ -89,6 +93,7 @@ const initialState: InitialStateType[] = [
     organizerName: "Vaibhav sharma",
     ticketleft: 200,
     totalticket: 200,
+    ticketperheadprice: 20,
   },
   {
     id: "2135",
@@ -107,6 +112,7 @@ const initialState: InitialStateType[] = [
     organizerName: "Vaibhav sharma",
     ticketleft: 200,
     totalticket: 200,
+    ticketperheadprice: 20,
   },
 ];
 
